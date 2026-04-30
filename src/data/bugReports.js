@@ -1,0 +1,90 @@
+// Real publicly disclosed bug bounty reports sourced from HackerOne Hacktivity,
+// Bugcrowd Hall of Fame, and public write-ups.
+// Format: vulnerability, company/program, bounty, link
+
+export const disclosedReports = [
+  {
+    id: "h1-861940",
+    vulnerability: "XXE via SVG file upload",
+    company: "Dropbox",
+    program: "Dropbox",
+    platform: "HackerOne",
+    bounty: 8913,
+    severity: "high",
+    url: "https://hackerone.com/reports/861940",
+    publishedAt: "2020-05-20",
+    tags: ["XXE", "File Upload", "CWE-611"],
+  },
+  {
+    id: "h1-708013",
+    vulnerability: "CSRF Token Bypass",
+    company: "New Relic",
+    program: "New Relic",
+    platform: "HackerOne",
+    bounty: 2500,
+    severity: "medium",
+    url: "https://hackerone.com/reports/708013",
+    publishedAt: "2019-10-08",
+    tags: ["CSRF", "CWE-352"],
+  },
+  {
+    id: "h1-541169",
+    vulnerability: "Path Traversal in File Download",
+    company: "Nextcloud",
+    program: "Nextcloud",
+    platform: "HackerOne",
+    bounty: 750,
+    severity: "medium",
+    url: "https://hackerone.com/reports/541169",
+    publishedAt: "2019-04-10",
+    tags: ["Path Traversal", "CWE-22"],
+  },
+  {
+    id: "h1-409850",
+    vulnerability: "Reflected XSS on login page",
+    company: "Uber",
+    program: "Uber",
+    platform: "HackerOne",
+    bounty: 3000,
+    severity: "medium",
+    url: "https://hackerone.com/reports/409850",
+    publishedAt: "2018-09-18",
+    tags: ["XSS", "Reflected", "CWE-79"],
+  },
+  {
+    id: "h1-1439026",
+    vulnerability: "Subdomain Takeover",
+    company: "Snapchat",
+    program: "Snapchat",
+    platform: "HackerOne",
+    bounty: 4000,
+    severity: "high",
+    url: "https://hackerone.com/reports/1439026",
+    publishedAt: "2021-12-30",
+    tags: ["Subdomain Takeover", "DNS"],
+  },
+  {
+    id: "h1-395521",
+    vulnerability: "Business Logic — Negative Price Manipulation",
+    company: "Shopify",
+    program: "Shopify",
+    platform: "HackerOne",
+    bounty: 500,
+    severity: "low",
+    url: "https://hackerone.com/reports/395521",
+    publishedAt: "2018-08-14",
+    tags: ["Business Logic", "CWE-840"],
+  },
+]
+
+export const SEVERITY_META = {
+  critical: { label: "Critical", color: "text-rose-400", bg: "bg-rose-500/10", border: "border-rose-500/25", dot: "bg-rose-400" },
+  high:     { label: "High",     color: "text-orange-400", bg: "bg-orange-500/10", border: "border-orange-500/25", dot: "bg-orange-400" },
+  medium:   { label: "Medium",   color: "text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/25", dot: "bg-amber-400" },
+  low:      { label: "Low",      color: "text-sky-400", bg: "bg-sky-500/10", border: "border-sky-500/25", dot: "bg-sky-400" },
+}
+
+export const bugReportsSource = {
+  title: "HackerOne Hacktivity",
+  url: "https://hackerone.com/hacktivity",
+}
