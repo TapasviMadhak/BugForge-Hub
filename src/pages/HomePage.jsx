@@ -14,12 +14,12 @@ import { Link } from "react-router-dom"
 import { blogPosts } from "../data/blogPosts"
 import { disclosedReports, SEVERITY_META } from "../data/bugReports"
 import { tools } from "../data/content"
-import checklistJson from "../data/masterChecklist.json"
+import { criticalFallbacks, roadmapPhases } from "../data/checklistRoadmap"
 
 const workspaces = [
   {
     title: "Master Checklist",
-    copy: "Track testing progress across the full web pentest checklist.",
+    copy: "Run the simplified roadmap, then expand categories for deep checks.",
     icon: ClipboardList,
     to: "/master-checklist",
     accent: "bg-lime-100 text-lime-900",
@@ -54,8 +54,12 @@ const workspaces = [
   },
 ]
 
+const roadmapSteps =
+  roadmapPhases.reduce((total, phase) => total + phase.items.length, 0) +
+  criticalFallbacks.reduce((total, bundle) => total + bundle.items.length, 0)
+
 const stats = [
-  { label: "Checklist Items", value: checklistJson.checklist.length },
+  { label: "Roadmap Steps", value: roadmapSteps },
   { label: "Tools", value: tools.length },
   { label: "Saved Posts", value: blogPosts.length },
   { label: "Disclosed Reports", value: disclosedReports.length },
@@ -105,7 +109,7 @@ export default function HomePage() {
                 <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-lime-300">
                   Active Index
                 </p>
-                <p className="text-xl font-extrabold">Bug Bounty Hub</p>
+                <p className="text-xl font-extrabold">BountyForge Hub</p>
               </div>
             </div>
 

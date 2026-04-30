@@ -4,6 +4,18 @@
 
 export const disclosedReports = [
   {
+    id: "h1-3556769",
+    vulnerability: "Incomplete fix for CVE-2026-21637 leads to Remote DoS",
+    company: "Node.js",
+    program: "Node.js",
+    platform: "HackerOne",
+    bounty: 0,
+    severity: "high",
+    url: "https://hackerone.com/reports/3556769",
+    publishedAt: "2026-04-23",
+    tags: ["DoS", "TLS", "Node.js", "CVE-2026-21637"],
+  },
+  {
     id: "h1-861940",
     vulnerability: "XXE via SVG file upload",
     company: "Dropbox",

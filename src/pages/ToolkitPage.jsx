@@ -53,31 +53,41 @@ export default function ToolkitPage() {
               {categoryTools.map((tool) => {
                 const copyId = `${tool.name}-install`
                 return (
-                  <article key={tool.name} className="page-panel rounded-lg p-5">
+                  <article key={tool.name} className="page-panel min-w-0 rounded-lg p-5">
                     <h3 className="text-lg font-extrabold text-neutral-950">{tool.name}</h3>
                     <p className="mt-2 text-sm leading-6 text-stone-600">{tool.purpose}</p>
-                    <div className="mt-4 rounded-lg border border-stone-200 bg-stone-50 p-3">
+                    <div className="mt-4 min-w-0 rounded-lg border border-stone-200 bg-stone-50 p-3">
                       <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-stone-500">
                         Install
                       </p>
-                      <pre className="overflow-x-auto text-xs text-stone-800">
-                        <code>{tool.install}</code>
-                      </pre>
+                      <SnippetBar
+                        id={copyId}
+                        text={tool.install}
+                        copied={copied === copyId}
+                        onCopy={copyText}
+                        className="text-stone-800"
+                      />
                     </div>
                     {tool.usage?.length ? (
-                      <div className="mt-3 rounded-lg border border-teal-200 bg-teal-50 p-3">
+                      <div className="mt-3 min-w-0 rounded-lg border border-teal-200 bg-teal-50 p-3">
                         <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-teal-700">
                           Usage
                         </p>
-                        <div className="grid gap-1.5">
-                          {tool.usage.map((command) => (
-                            <pre
-                              key={command}
-                              className="overflow-x-auto whitespace-nowrap rounded-md border border-stone-200 bg-white px-3 py-2 text-xs text-stone-800"
-                            >
-                              <code>{command}</code>
-                            </pre>
-                          ))}
+                        <div className="grid min-w-0 gap-1.5">
+                          {tool.usage.map((command, index) => {
+                            const usageCopyId = `${tool.name}-usage-${index}`
+
+                            return (
+                              <SnippetBar
+                                key={usageCopyId}
+                                id={usageCopyId}
+                                text={command}
+                                copied={copied === usageCopyId}
+                                onCopy={copyText}
+                                className="whitespace-nowrap text-stone-800"
+                              />
+                            )
+                          })}
                         </div>
                       </div>
                     ) : null}
@@ -97,5 +107,24 @@ export default function ToolkitPage() {
         ))}
       </div>
     </section>
+  )
+}
+
+function SnippetBar({ id, text, copied, onCopy, className = "" }) {
+  return (
+    <div className="group/snippet relative min-w-0 max-w-full rounded-md border border-stone-200 bg-white text-xs">
+      <button
+        type="button"
+        onClick={() => onCopy(id, text)}
+        className="absolute left-1.5 top-1/2 z-10 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded border border-stone-300 bg-white text-stone-700 opacity-0 shadow-sm transition hover:border-teal-500 hover:text-teal-700 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-teal-500 group-hover/snippet:opacity-100"
+        aria-label={copied ? "Copied snippet" : "Copy snippet"}
+        title={copied ? "Copied" : "Copy"}
+      >
+        <Copy size={12} />
+      </button>
+      <pre className={["min-w-0 max-w-full overflow-x-auto px-3 py-2 pl-10", className].join(" ")}>
+        <code>{text}</code>
+      </pre>
+    </div>
   )
 }

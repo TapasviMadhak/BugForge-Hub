@@ -13,6 +13,15 @@
 // If a remote cover is slow or broken, the page falls back to a source panel.
 export const blogPosts = [
   {
+    id: "bugcrowd-react2shell-cve-2025-55182",
+    type: "article",
+    title: "CVE-2025-55182: What You Need to Know About React2Shell",
+    url: "https://www.bugcrowd.com/blog/cve-2025-55182-what-you-need-to-know-about-react2shell/",
+    source: "Bugcrowd",
+    tags: ["CVE", "React", "Bugcrowd", "vulnerability"],
+    description: "Bugcrowd breakdown of CVE-2025-55182 and the React2Shell impact and mitigations.",
+  },
+  {
     id: "hackerone-automation-blocked-critical",
     type: "reddit",
     title: "HackerOne automation blocked my critical $100",

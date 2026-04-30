@@ -86,14 +86,16 @@ export default function App() {
                 <ShieldCheck size={21} />
               </span>
               <div>
-                <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-teal-700">Bug Bounty</p>
-                <p className="text-base font-extrabold text-neutral-950">Community Hub</p>
+                <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-neutral-950 dark:text-stone-300">
+                  Security Workspace
+                </p>
+                <p className="text-base font-extrabold text-neutral-950">BountyForge Hub</p>
               </div>
             </div>
 
             <div className="mt-4 border-b border-stone-200 pb-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-stone-500">Workspace</p>
-              <p className="mt-2 text-sm leading-relaxed text-stone-600">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-950">Workspace</p>
+              <p className="mt-2 text-sm font-medium leading-relaxed text-neutral-950">
                 Checklists, reports, tools, posts, and profile notes in one focused hunting console.
               </p>
             </div>
@@ -107,12 +109,11 @@ export default function App() {
                   className={({ isActive }) =>
                     [
                       "inline-flex min-h-11 items-center gap-3 rounded-lg px-3 py-2 text-sm font-bold transition",
-                      featured ? "border border-lime-300" : "",
                       isActive
-                        ? "bg-neutral-950 text-white shadow-sm"
+                        ? "bg-neutral-950 text-white shadow-sm dark:bg-teal-400 dark:text-stone-950"
                         : featured
-                          ? "bg-lime-50 text-neutral-950 hover:bg-lime-100"
-                        : "text-stone-700 hover:bg-stone-100 hover:text-neutral-950",
+                          ? "nav-link-inactive nav-link-featured border border-lime-300 bg-lime-50 hover:bg-lime-100 dark:border-lime-300 dark:bg-lime-50 dark:hover:bg-lime-100"
+                          : "nav-link-inactive border border-transparent hover:bg-stone-100 hover:text-neutral-950 dark:hover:bg-stone-900/60",
                     ].join(" ")
                   }
                 >
