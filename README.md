@@ -22,8 +22,8 @@ A focused web pentest checklist workspace built with React, Tailwind CSS (v4), V
 ## Run Locally
 
 ```bash
-corepack pnpm install
-corepack pnpm dev
+npm install
+npm run dev
 ```
 
 Open http://localhost:5173
@@ -31,6 +31,6 @@ Open http://localhost:5173
 ## Build and Lint
 
 ```bash
-corepack pnpm lint
-corepack pnpm build
+npm run lint
+npm run build
 ```
