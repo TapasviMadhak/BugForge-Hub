@@ -132,7 +132,7 @@ export default function MasterChecklistPage() {
         }
       })
 
-      const phaseItemIds = phase.items.map((item) => item.id)
+      const phaseItemIds = phase.items.map((item) => getPhaseItemId(phase.key, item.id))
       const phaseRowIds = phaseRows.map((row) => getRowId(row))
       const phaseCompleted = [...phaseItemIds, ...phaseRowIds].filter((id) => checkedRows.has(id)).length
       const phaseTotal = phaseItemIds.length + phaseRowIds.length
@@ -158,7 +158,7 @@ export default function MasterChecklistPage() {
         ? bundle.items
         : bundle.items.filter((item) => isMatch(normalizedQuery, item.label, item.note))
 
-      const bundleItemIds = bundle.items.map((item) => item.id)
+      const bundleItemIds = bundle.items.map((item) => getFallbackItemId(bundle.key, item.id))
       const bundleCompleted = bundleItemIds.filter((id) => checkedRows.has(id)).length
       const bundleTotal = bundleItemIds.length
 
@@ -186,7 +186,7 @@ export default function MasterChecklistPage() {
     const ids = new Set()
 
     for (const phase of roadmapPhases) {
-      for (const item of phase.items) ids.add(item.id)
+      for (const item of phase.items) ids.add(getPhaseItemId(phase.key, item.id))
     }
 
     for (const row of rows) {
@@ -194,7 +194,7 @@ export default function MasterChecklistPage() {
     }
 
     for (const bundle of criticalFallbacks) {
-      for (const item of bundle.items) ids.add(item.id)
+      for (const item of bundle.items) ids.add(getFallbackItemId(bundle.key, item.id))
     }
 
     return ids
