@@ -46,10 +46,10 @@ export default function BugReportsPage() {
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <p className="eyebrow">Disclosed Reports</p>
-            <h1 className="mt-2 text-4xl font-extrabold text-neutral-950">Bug Reports</h1>
+            <h1 className="mt-2 text-4xl font-extrabold text-neutral-950">Community Bug Reports</h1>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-stone-600">
-              Real publicly disclosed bug bounty reports from HackerOne Hacktivity. Each card shows
-              the vulnerability type, company, and bounty paid.
+              Community-sourced, publicly disclosed bug bounty reports. Each card shows the vulnerability type,
+              company, and bounty paid.
             </p>
           </div>
           <a

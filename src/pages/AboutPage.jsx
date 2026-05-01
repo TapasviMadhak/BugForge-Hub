@@ -1,4 +1,5 @@
-import { ExternalLink, ShieldCheck } from "lucide-react"
+import { ExternalLink, Eye, ShieldCheck } from "lucide-react"
+import { useEffect, useState } from "react"
 
 const profileLinks = [
   { label: "Portfolio", url: "https://tapasvimadhak.works" },
@@ -6,6 +7,8 @@ const profileLinks = [
   { label: "GitHub", url: "https://github.com/TapasviMadhak/" },
   { label: "TryHackMe", url: "https://tryhackme.com/p/tapasvimadhak" },
 ]
+
+const VISIT_API = "/.netlify/functions/visit-counter"
 
 const LinkItem = ({ label, url, inverse = false }) => (
   <a
@@ -25,6 +28,58 @@ const LinkItem = ({ label, url, inverse = false }) => (
     />
   </a>
 )
+
+function SiteVisitsCard() {
+  const [visits, setVisits] = useState(null)
+  const [status, setStatus] = useState("loading")
+
+  useEffect(() => {
+    let isMounted = true
+
+    const fetchVisits = async () => {
+      try {
+        const response = await fetch(VISIT_API, {
+          credentials: "include",
+          cache: "no-store",
+        })
+        if (!response.ok) throw new Error("Visit counter request failed")
+
+        const data = await response.json()
+        const count = Number(data?.count)
+        if (!isMounted) return
+
+        setVisits(Number.isFinite(count) ? count : null)
+        setStatus("ready")
+      } catch {
+        if (!isMounted) return
+        setStatus("error")
+      }
+    }
+
+    fetchVisits()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  const displayValue = Number.isFinite(visits) ? visits : status === "loading" ? "..." : "--"
+
+  return (
+    <div className="page-panel rounded-lg p-4">
+      <div className="flex items-center justify-between gap-4">
+        <div>
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-stone-500">Site Visits</p>
+          <p className="mt-1 text-3xl font-extrabold text-neutral-950">{displayValue}</p>
+          
+        </div>
+        <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-teal-100 text-teal-700">
+          <Eye size={20} />
+        </span>
+      </div>
+    </div>
+  )
+}
 
 export default function AboutPage() {
   return (
@@ -53,7 +108,7 @@ export default function AboutPage() {
           </div>
         </div>
       </header>
-
+      <SiteVisitsCard />
     </section>
   )
 }

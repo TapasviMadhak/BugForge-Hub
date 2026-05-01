@@ -18,6 +18,7 @@ const navigation = [
 ]
 
 const THEME_STORAGE_KEY = "bb-theme"
+const VISIT_API = "/.netlify/functions/visit-counter"
 
 const getInitialTheme = () => {
   if (typeof window === "undefined") return "light"
@@ -40,6 +41,13 @@ export default function App() {
     document.documentElement.style.colorScheme = theme
     localStorage.setItem(THEME_STORAGE_KEY, theme)
   }, [isDark, theme])
+
+  useEffect(() => {
+    fetch(VISIT_API, {
+      credentials: "include",
+      cache: "no-store",
+    }).catch(() => {})
+  }, [])
 
   useEffect(() => {
     return () => {

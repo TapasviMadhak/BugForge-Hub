@@ -13,6 +13,42 @@
 // If a remote cover is slow or broken, the page falls back to a source panel.
 export const blogPosts = [
   {
+    id: "reddit-effective-bug-reports",
+    type: "reddit",
+    title: "The art of writing effective bug reports",
+    url: "https://www.reddit.com/r/softwaretesting/comments/147cy4k/the_art_of_writing_effective_bug_reports_whats/",
+    source: "Reddit",
+    tags: ["bug reports", "testing", "communication"],
+    description: "Discussion thread from r/softwaretesting on writing effective bug reports.",
+  },
+  {
+    id: "bugcrowd-excellent-reports-guide",
+    type: "article",
+    title: "How to write excellent reports",
+    url: "https://www.bugcrowd.com/resources/levelup/how-to-write-excellent-reports-techniques-that-save-triagers-time-and-mistakes-that-should-be-avoided-in-reports/",
+    source: "Bugcrowd",
+    tags: ["report writing", "triage", "bug bounty"],
+    description: "Bugcrowd guide on writing high-quality reports and avoiding common mistakes.",
+  },
+  {
+    id: "tweet-harshbothra-1270404745451106310",
+    type: "tweet",
+    title: "Report writing tips by Harsh Bothra",
+    url: "https://x.com/harshbothra_/status/1270404745451106310?s=20",
+    source: "X / Twitter",
+    tags: ["report writing", "bug bounty"],
+    description: "Short tips on writing effective bug reports.",
+  },
+  {
+    id: "tweet-securestep9-1285566699283132416",
+    type: "tweet",
+    title: "Report writing notes by SecureStep9",
+    url: "https://x.com/securestep9/status/1285566699283132416?s=20",
+    source: "X / Twitter",
+    tags: ["report writing", "triage"],
+    description: "Community advice on improving report quality.",
+  },
+  {
     id: "bugcrowd-react2shell-cve-2025-55182",
     type: "article",
     title: "CVE-2025-55182: What You Need to Know About React2Shell",

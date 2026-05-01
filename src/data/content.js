@@ -219,4 +219,10 @@ export const tools = [
       "Use generated code snippets to reproduce API bugs",
     ],
   },
+  {
+    category: "Community Collections",
+    name: "Ultimate Bughunter Tools",
+    purpose: "Curated GitHub list of bug bounty tools and resources.",
+    install: "git clone https://github.com/dreamer1eh/ultimate_bughunter_tools",
+  },
 ]
